@@ -1,0 +1,20 @@
+{
+  "name": "kiesel/core",
+  "description": "The XP framework is an all-purpose, object oriented PHP framework.",
+  "version": "6.0.0-dev",
+
+  "type": "library",
+  "homepage": "http://xp-framework.net/",
+  "license": "BSD-3-Clause",
+
+  "require": {
+    "php": ">= 5.3.0",
+    "ext-sockets": "*",
+    "ext-libxml": "*",
+    "ext-posix": "*",
+    "ext-tokenizer": "*",
+    "ext-intl": "*",
+    "ext-dom": "*",
+    "ext-date": "*"
+  }
+}
