@@ -2,8 +2,8 @@
   "name": "kiesel/core",
   "description": "The XP framework is an all-purpose, object oriented PHP framework.",
   "version": "6.0.0-dev",
+  "type": "xp-library",
 
-  "type": "library",
   "homepage": "http://xp-framework.net/",
   "license": "BSD-3-Clause",
 
@@ -15,6 +15,14 @@
     "ext-tokenizer": "*",
     "ext-intl": "*",
     "ext-dom": "*",
-    "ext-date": "*"
-  }
+    "ext-date": "*",
+    "kiesel/xp-composer-installer": "*"
+  },
+
+  "repositories" : [
+    {
+      "type": "vcs",
+      "url": "https://github.com/kiesel/xp-composer-installer"
+    }
+  ]
 }
