@@ -1,5 +1,5 @@
 {
-  "name": "kiesel/core",
+  "name": "xp-framework/core",
   "description": "The XP framework is an all-purpose, object oriented PHP framework.",
   "version": "6.0.0-dev",
   "type": "xp-library",
@@ -24,7 +24,7 @@
     "ext-intl": "*",
     "ext-dom": "*",
     "ext-date": "*",
-    "kiesel/xp-composer-installer": "*"
+    "xp-forge/xp-composer-installer": "*"
   }
 
 }
