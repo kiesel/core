@@ -181,9 +181,17 @@ class Runner extends \lang\Object {
     if (!$operation) return self::usage();
     
     // Use STDOUT & STDERR if no file is given
-    if ($std) $file= new File($std);
+    if ($std) {
+      $archive= new \lang\archive\Archive(new File($std));
+    } else if ('.xar' == substr($file->getURI(), -4)) {
+      $archive= new \lang\archive\Archive($file);
+    } else if ('.phar' == substr($file->getURI(), -5)) {
+      $archive= new \lang\archive\PharArchive($file);
+    } else {
+      self::bail('Unsupported file format "'.$file.'"');
+    }
    
     // Perform operation
-    $operation->newInstance(Console::$out, Console::$err, $options, new \lang\archive\Archive($file), $args)->perform();
+    $operation->newInstance(Console::$out, Console::$err, $options, $archive, $args)->perform();
   } 
 }
