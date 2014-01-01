@@ -4,10 +4,9 @@ use lang\ElementNotFoundException;
 use io\EncapsedStream;
 use io\FileUtil;
 
-define('ARCHIVE_READ',             0x0000);
-define('ARCHIVE_CREATE',           0x0001);
-define('ARCHIVE_HEADER_SIZE',      0x0100);
-define('ARCHIVE_INDEX_ENTRY_SIZE', 0x0100);
+// Only aliases for those in lang.archive.Archive - be sure to keep them at the same values
+define('PHARCHIVE_READ',             0x0000);
+define('PHARCHIVE_CREATE',           0x0001);
 
 
 /**
@@ -37,8 +36,8 @@ define('ARCHIVE_INDEX_ENTRY_SIZE', 0x0100);
  */
 class PharArchive extends \lang\Object {
   const
-    ARCHIVE_READ   = 0x0000,
-    ARCHIVE_CREATE = 0x0001;
+    ARCHIVE_READ   = PHARCHIVE_READ,
+    ARCHIVE_CREATE = PHARCHIVE_CREATE;
 
   private
     $archive = null,
@@ -52,7 +51,7 @@ class PharArchive extends \lang\Object {
   public function __construct(\io\File $file) {
     $this->file= $file;
   }
-
+  
   /**
    * Get URI
    *
