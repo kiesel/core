@@ -185,32 +185,29 @@ class PharArchiveClassLoader extends AbstractClassLoader {
    */
   public function packageContents($package) {
     $contents= array();
-    $acquired= \xarloader::acquire(urldecode(substr($this->archive, 6, -1)));
+
     $cmps= strtr($package, '.', '/');
     $cmpl= strlen($cmps);
 
-    foreach (array_keys($acquired['index']) as $e) {
-      if (strncmp($cmps, $e, $cmpl) != 0) continue;
-      $entry= 0 != $cmpl ? substr($e, $cmpl+ 1) : $e;
+    $dir= @opendir($this->archive.$cmps);
+    if (false === $dir) return array();
 
-      // Check to see if we're getting something in a subpackage. Imagine the
-      // following structure:
-      //
-      // archive.xar
-      // - tests/ClassOne.class.php
-      // - tests/classes/RecursionTest.class.php
-      // - tests/classes/ng/NextGenerationRecursionTest.class.php
-      //
-      // When this method is invoked with "tests" as name, "ClassOne.class.php"
-      // and "classes/" should be returned (but neither any of the subdirectories
-      // nor their contents)
-      if (false !== ($p= strpos($entry, '/'))) {
-        $entry= substr($entry, 0, $p);
-        if (strstr($entry, '/')) continue;
-        $entry.= '/';
-      }
-      $contents[$entry]= null;
+    // Check to see if we're getting something in a subpackage. Imagine the
+    // following structure:
+    //
+    // archive.xar
+    // - tests/ClassOne.class.php
+    // - tests/classes/RecursionTest.class.php
+    // - tests/classes/ng/NextGenerationRecursionTest.class.php
+    //
+    // When this method is invoked with "tests" as name, "ClassOne.class.php"
+    // and "classes/" should be returned (but neither any of the subdirectories
+    // nor their contents)
+    while (false !== ($e= readdir($dir))) {
+      if (is_dir($this->archive.$cmps.$e)) $e.= '/';
+      $contents[$e]= null;
     }
+
     return array_keys($contents);
   }
 }
