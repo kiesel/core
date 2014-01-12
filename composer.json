@@ -8,13 +8,6 @@
   "license": "BSD-3-Clause",
   "minimum-stability": "dev",
 
-  "repositories" : [
-    {
-      "type": "vcs",
-      "url": "https://github.com/kiesel/xp-composer-installer"
-    }
-  ],
-
   "require": {
     "php": ">= 5.3.0",
     "ext-sockets": "*",
